@@ -72,7 +72,7 @@ Routes the correct BCD digit (ones, tens, hundreds, thousands, or sign) to the 7
 - **Axis selection**: SW14 and SW13 select which axis (X, Y, Z) is displayed in accelerometer mode
 - **RGB LED orientation indicator**: LED colour reflects board tilt based on averaged X, Y, Z values
 - **Fully structural top-level** with clearly defined component interfaces
-- **Comprehensive testbench** for `bin2BCD` covering positive values, negative values, zero, and boundary cases
+- **Exhaustive testbench** for `bin2BCD` testing all 4096 possible 12-bit input values with automated assertion checking — not just boundary cases, every single input vector validated
 
 ---
 
@@ -103,8 +103,10 @@ Routes the correct BCD digit (ones, tens, hundreds, thousands, or sign) to the 7
 │   ├── ADXL362Ctrl.vhd      # ADXL362 SPI controller and averager
 │   ├── SPI_If.vhd           # SPI interface controller
 │   └── avg32_from_avg16.vhd # 32-sample averager
-└── testbench/
-    └── bin2BCD_tb.vhd       # Testbench for BCD conversion component
+├── testbench/
+│   └── bin2BCD_tb.vhd       # Exhaustive testbench — all 4096 input vectors
+└── constraints/
+    └── EE3070_display.xdc   # Nexys-A7 pin assignments
 ```
 
 ---
